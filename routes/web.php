@@ -15,6 +15,6 @@ Route::post('/register', [RegisteredUserController::class, 'store']);
 Route::get('/login', [SessionController::class, 'index'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 
-// Route::view('/dashboard', 'dashboard')->middleware('auth');
+Route::view('/dashboard', 'dashboard')->middleware('auth');
 
-Route::view('/dashboard', 'dashboard');
+// Route::view('/dashboard', 'dashboard');

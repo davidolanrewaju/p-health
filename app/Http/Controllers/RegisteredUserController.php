@@ -25,13 +25,13 @@ class RegisteredUserController
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Password::min(8)],
+            'password' => ['required', 'confirmed', Password::min(8)->letters()->mixedCase()->numbers()->symbols()],
         ]);
         $validated['contact'] = $request->input('contact');
         $user = User::create($validated);
 
         Auth::login($user);
 
-        return redirect('/jobs');
+        return redirect('/dashboard');
     }
 }

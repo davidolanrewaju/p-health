@@ -34,7 +34,7 @@ class SessionController
         }
 
         $request->session()->regenerate();
-        return redirect('/jobs');
+        return redirect('/dashboard');
     }
 
     public function destroy()
