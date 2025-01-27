@@ -38,8 +38,8 @@
 					<x-input-error class="mt-2" :messages="$errors->get('password_confirmation')" />
 				</div>
 
-				<div class="mt-4 flex items-center justify-between">
-					<a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" href="{{ route('login') }}">
+				<div class="mt-4 flex items-end justify-between">
+					<a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('login') }}">
 						{{ __('Already registered?') }}
 					</a>
 					<x-primary-button>

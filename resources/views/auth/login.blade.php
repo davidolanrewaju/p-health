@@ -30,7 +30,10 @@
 					</label>
 				</div>
 
-				<div class="mt-4 flex items-center justify-end">
+				<div class="mt-4 flex items-end justify-between">
+                    <a class="rounded-md text-sm text-gray-600 underline hover:text-gray-900" href="{{ route('register') }}">
+						{{ __("Don't have an account? Sign Up") }}
+					</a>
 					<x-primary-button>
 						{{ __('Log in') }}
 					</x-primary-button>

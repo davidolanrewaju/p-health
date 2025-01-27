@@ -1,121 +1,74 @@
-<div class="flex h-screen flex-col justify-between border-e bg-white">
-	<div class="px-4 py-6">
-		<span class="bg-green-500 grid h-10 w-32 place-content-center rounded-lg text-lg text-gray-600">
-				<h1 class="font-extrabold text-slate-900">PLASU <span class="font-light text-zinc-100">Health</span></h1>
-		</span>
+@props(['user'])
 
-		<ul class="mt-6 space-y-1">
-			<li>
-				<a
-					class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700" href="#">
-					General
-				</a>
-			</li>
+<!-- Hamburger Button -->
+<button class="fixed mb-10 left-4 top-4 z-50 rounded-md bg-green-500 p-2 lg:hidden" id="hamburger">
+ <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+ </svg>
+</button>
 
-			<li>
-				<details class="group [&_summary::-webkit-details-marker]:hidden">
-					<summary
-						class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-						<span class="text-sm font-medium"> Teams </span>
+<!-- Sidebar -->
+<div class="fixed inset-y-0 left-0 z-40 flex h-screen w-64 -translate-x-full transform flex-col justify-between border-e bg-white transition duration-200 ease-in-out lg:relative lg:translate-x-0"
+ id="sidebar">
+ <button class="absolute right-4 top-4 rounded-md bg-green-500 p-2 lg:hidden" id="close-sidebar">
+  <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+  </svg>
+ </button>
 
-						<span class="shrink-0 transition duration-300 group-open:-rotate-180">
-							<svg
-								class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-								<path
-									fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-							</svg>
-						</span>
-					</summary>
+ <div class="px-4 py-20 lg:py-6">
+  <a href="{{route('dashboard')}}" class="grid h-14 w-full place-content-center rounded-md bg-green-500 text-2xl text-gray-600">
+   <h1 class="font-extrabold text-slate-900">PLASU<span class="font-light text-zinc-100">Health</span></h1>
+  </a>
 
-					<ul class="mt-2 space-y-1 px-4">
-						<li>
-							<a
-								class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700" href="#">
-								Banned Users
-							</a>
-						</li>
+  <ul class="mt-6 space-y-3">
+   <x-nav-link :active="request()->is('dashboard')" icon="heroicon-s-home" link="/dashboard">
+    Dashboard
+   </x-nav-link>
 
-						<li>
-							<a
-								class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700" href="#">
-								Calendar
-							</a>
-						</li>
-					</ul>
-				</details>
-			</li>
+   <x-nav-link :active="request()->is('medications*')" icon="gmdi-medication-liquid-r" link="/medications">
+    My Medications
+   </x-nav-link>
 
-			<li>
-				<a
-					class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700" href="#">
-					Billing
-				</a>
-			</li>
+   <x-nav-link :active="request()->is('schedule*')" icon="healthicons-f-i-schedule-school-date-time" link="/schedule">
+    Schedule
+   </x-nav-link>
 
-			<li>
-				<a
-					class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700" href="#">
-					Invoices
-				</a>
-			</li>
+   <x-nav-link :active="request()->is('notifications*')" icon="heroicon-o-bell" link="/notifications">
+    @if ($user->unreadNotifications->count() === 0)
+        Notifications
+    @else
+        Notifications({{ $user->unreadNotifications->count() }})
+    @endif
+   </x-nav-link>
 
-			<li>
-				<details class="group [&_summary::-webkit-details-marker]:hidden">
-					<summary
-						class="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
-						<span class="text-sm font-medium"> Account </span>
+   <x-nav-link :active="request()->is('settings*')" icon="gmdi-settings" link="/settings">
+    Settings
+   </x-nav-link>
+  </ul>
+ </div>
 
-						<span class="shrink-0 transition duration-300 group-open:-rotate-180">
-							<svg
-								class="size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-								<path
-									fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-							</svg>
-						</span>
-					</summary>
+ <!-- Keep existing profile section -->
+ <div class="sticky inset-x-0 my-5 border-gray-100">
+  <form class="mx-4 my-8" action="{{route('logout')}}" method="post">
+   <button class="flex w-full items-center justify-between rounded-lg bg-slate-200 px-4 py-2 hover:bg-green-600" type="submit">
+    <p class="text-sm font-medium">Logout</p>
+    <x-gmdi-logout-r class="h-6 w-5" />
+   </button>
+  </form>
 
-					<ul class="mt-2 space-y-1 px-4">
-						<li>
-							<a
-								class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700" href="#">
-								Details
-							</a>
-						</li>
+  <a class="flex items-center gap-2 bg-slate-200 p-4 hover:bg-slate-800 hover:text-white" href="#">
+   <img class="size-10 rounded-full object-cover" src="{{ asset('images/profile.jpg') }}" alt="" />
 
-						<li>
-							<a
-								class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700" href="#">
-								Security
-							</a>
-						</li>
-
-						<li>
-							<form action="#">
-								<button
-									class="w-full rounded-lg px-4 py-2 text-sm font-medium text-gray-500 [text-align:_inherit] hover:bg-gray-100 hover:text-gray-700" type="submit">
-									Logout
-								</button>
-							</form>
-						</li>
-					</ul>
-				</details>
-			</li>
-		</ul>
-	</div>
-
-	<div class="sticky inset-x-0 bottom-0 border-t border-gray-100">
-		<a class="flex items-center gap-2 bg-white p-4 hover:bg-gray-50" href="#">
-			<img
-				class="size-10 rounded-full object-cover"
-				src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="" />
-
-			<div>
-				<p class="text-xs">
-					<strong class="block font-medium">Eric Frusciante</strong>
-
-					<span> eric@frusciante.com </span>
-				</p>
-			</div>
-		</a>
-	</div>
+   <div>
+    <p class="text-sm">
+     <strong class="block font-bold">{{ $user->name }}</strong>
+     <span>{{ $user->email }}</span>
+    </p>
+   </div>
+  </a>
+ </div>
 </div>
+
+<!-- Overlay -->
+<div class="fixed inset-0 z-30 hidden bg-black opacity-50 lg:hidden" id="sidebar-overlay"></div>

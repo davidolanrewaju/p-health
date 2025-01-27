@@ -1,11 +1,11 @@
-@props(['active'])
+@props(['active' => false, 'icon', 'link' => '#'])
 
-@php
-$classes = ($active ?? false)
-            ? 'inline-flex items-center px-1 pt-1 border-b-2 border-indigo-400 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out'
-            : 'inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out';
-@endphp
-
-<a {{ $attributes->merge(['class' => $classes]) }}>
-    {{ $slot }}
-</a>
+<li class="{{ $active ? 'bg-gray-100 text-gray-700' : 'text-gray-500 hover:bg-gray-100 hover:text-gray-700' }} flex items-center gap-4 rounded-lg px-4 py-2"
+    @if ($active) aria-current="page" @endif>
+    @if ($icon)
+        <x-dynamic-component class="h-5 w-5 text-green-700" :component="$icon" />
+    @endif
+    <a class="block text-sm font-medium" href="{{ $link }}">
+        {{ $slot }}
+    </a>
+</li>

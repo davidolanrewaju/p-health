@@ -34,12 +34,17 @@ class SessionController
         }
 
         $request->session()->regenerate();
-        return redirect('/dashboard');
+        
+        return redirect()->route('dashboard');
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
         Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect('/');
     }
 }
