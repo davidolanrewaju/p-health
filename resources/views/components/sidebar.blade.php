@@ -49,7 +49,7 @@
  </div>
 
  <!-- Keep existing profile section -->
- <div class="sticky inset-x-0 my-5 border-gray-100">
+ <div class="sticky inset-x-0 border-gray-100">
   <form class="mx-4 my-8" action="{{route('logout')}}" method="post">
    <button class="flex w-full items-center justify-between rounded-lg bg-slate-200 px-4 py-2 hover:bg-green-600" type="submit">
     <p class="text-sm font-medium">Logout</p>

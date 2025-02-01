@@ -9,6 +9,12 @@
 				<a class="rounded-full block border-2 w-40 md:w-52 border-green-500 px-8 py-2 md:px-10 md:py-3 text-center text-lg md:text-xl uppercase text-green-500 hover:border-transparent hover:text-white hover:bg-green-800" href="{{ route('login') }}">Log In</a>
 				<a class="rounded-full block border-2 border-transparent w-40 md:w-52 bg-green-500 px-8 py-2 md:px-10 md:py-3 text-center text-lg md:text-xl uppercase text-white hover:bg-green-800" href="{{ route('register') }}">Register</a>
 			</div>
+            <div class="google flex items-center justify-center my-8">
+               <a href="{{route('google.login')}}" class="px-4 flex items-center gap-4 border rounded-full border-gray-400">
+                <img src="{{asset('images/google.svg')}}" alt="google" width="50px" height="50px">
+                <span class="uppercase">Login with Google</span>
+               </a> 
+            </div>
 		</div>
 	</div>
 </x-layout>

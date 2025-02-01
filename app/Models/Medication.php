@@ -21,6 +21,7 @@ class Medication extends Model
     'requiresFasting',
     'schedule',
     'status',
+    'google_event_ids',
   ];
 
   protected $casts = [
@@ -28,6 +29,7 @@ class Medication extends Model
     'schedule' => 'array',
     'startDate' => 'date',
     'endDate' => 'date',
+    'google_event_ids' => 'array',
   ];
 
   public function user()

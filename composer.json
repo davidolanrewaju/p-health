@@ -15,7 +15,9 @@
         "codeat3/blade-google-material-design-icons": "^1.19",
         "codeat3/blade-prime-icons": "^1.6",
         "davidhsianturi/blade-bootstrap-icons": "^1.5",
+        "google/apiclient": "*",
         "laravel/framework": "^11.31",
+        "laravel/socialite": "*",
         "laravel/tinker": "^2.9",
         "troccoli/blade-health-icons": "^4.0",
         "yoeunes/toastr": "^3.1"
@@ -73,7 +75,8 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
-        }
+        },
+        "process-timeout": 600
     },
     "minimum-stability": "stable",
     "prefer-stable": true

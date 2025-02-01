@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DisplayNotification;
+use App\Http\Controllers\GoogleAuthController;
 use App\Http\Controllers\MedicationController;
 // use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +22,12 @@ Route::get('/login', [SessionController::class, 'index'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy'])->name('logout');
 
-Route::get('/dashboard', function () {
-    return view('dashboard', ['user' => Auth::user()]);
-})->middleware('auth')->name('dashboard');
+Route::middleware(['throttle:6,1'])->group(function () {
+    Route::get('/auth/google', [GoogleAuthController::class, 'redirectToGoogle'])->name('google.login');
+    Route::get('/auth/google/callback', [GoogleAuthController::class, 'handleGoogleCallback']);
+});
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/medications', [MedicationController::class, 'index'])->name('medication');
@@ -43,6 +49,4 @@ Route::get('/settings', function () {
     return view('pages.settings', ['user' => Auth::user()]);
 })->middleware('auth');
 
-Route::get('/schedule', function () {
-    return view('pages.schedule', ['user' => Auth::user()]);
-})->middleware('auth')->name('schedule');
+Route::get('/schedule', [ScheduleController::class, 'index'])->middleware('auth')->name('schedule');
