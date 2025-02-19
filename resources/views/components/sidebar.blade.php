@@ -18,7 +18,7 @@
 
  <div class="px-4 py-20 lg:py-6">
   <a href="{{route('dashboard')}}" class="grid h-14 w-full place-content-center rounded-md bg-green-500 text-2xl text-gray-600">
-   <h1 class="font-extrabold text-slate-900">PLASU<span class="font-light text-zinc-100">Health</span></h1>
+   <h1 class="font-extrabold text-slate-900">UniJOS<span class="font-light text-zinc-100">Health</span></h1>
   </a>
 
   <ul class="mt-6 space-y-3">
